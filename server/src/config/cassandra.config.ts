@@ -1,13 +1,14 @@
-import * as cassandra from "express-cassandra";
+import path from "path";
+import models from "express-cassandra";
 
 const { NODE_ENV, DB_CONTACT_POINTS, DB_PORT, DB_KEYSPACE } = process.env;
 
-const models = cassandra.createClient({
+models.setDirectory(path.join(__dirname, "/models")).bind({
     clientOptions: {
         contactPoints: [DB_CONTACT_POINTS],
         protocolOptions: { port: DB_PORT },
         keyspace: DB_KEYSPACE,
-        queryOptions: { consistency: cassandra.consistencies.one },
+        queryOptions: { consistency: models.consistencies.one },
     },
     ormOptions: {
         defaultReplicationStrategy: {
@@ -15,6 +16,9 @@ const models = cassandra.createClient({
             replication_factor: 1,
         },
         migration: NODE_ENV === "production" ? "safe" : "drop",
+    },
+    function(error: any) {
+        if (error) throw error;
     },
 });
 

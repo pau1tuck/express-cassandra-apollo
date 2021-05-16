@@ -1,6 +1,7 @@
 import { gql } from "apollo-server-express";
+import users from "../resolvers/user/users.resolver";
 
-export const UserObject = `
+export const typeDefs = gql`
     type User {
         id: String!
         facebookId: String
@@ -14,8 +15,16 @@ export const UserObject = `
         email: String
         password: String
         verified: Boolean
-        roles: String[]
+        roles: [String]
         createdAt: String
         updatedAt: String
     }
+
+    type Query {
+        users: [User]
+    }
 `;
+
+export const resolvers = {
+    Query: () => users,
+};

@@ -1,8 +1,13 @@
+import { merge } from "lodash";
 import { makeExecutableSchema } from "apollo-server-express";
-import { UserObject } from "../graphql/user.type";
+import {
+    typeDefs as User,
+    resolvers as userResolvers,
+} from "../graphql/user.graphql";
 
-const graphqlSchema = makeExecutableSchema({
-    typeDefs: [UserObject],
+const graphQLSchema = makeExecutableSchema({
+    typeDefs: User,
+    resolvers: userResolvers,
 });
 
-export default graphqlSchema;
+export default graphQLSchema;
