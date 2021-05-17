@@ -21,6 +21,7 @@ npm-debug.log
 # production
 /build
 /dist
+/server/dist
 
 # debug
 npm-debug.log*

@@ -3,6 +3,7 @@ declare namespace NodeJS {
         NODE_ENV: string;
         DEBUG: boolean;
         PORT: string;
+        CORS_ORIGIN: string;
         DB_CONTACT_POINTS: string;
         DB_PORT: number;
         DB_KEYSPACE: string;

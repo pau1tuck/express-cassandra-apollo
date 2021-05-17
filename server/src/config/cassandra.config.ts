@@ -1,5 +1,6 @@
 import path from "path";
 import models from "express-cassandra";
+import { TError } from "../types/error.type";
 
 const { NODE_ENV, DB_CONTACT_POINTS, DB_PORT, DB_KEYSPACE } = process.env;
 
@@ -17,8 +18,8 @@ models.setDirectory(path.join(__dirname, "/models")).bind({
         },
         migration: NODE_ENV === "production" ? "safe" : "drop",
     },
-    function(error: any) {
-        if (error) throw error;
+    function(err: TError) {
+        if (err) throw err;
     },
 });
 

@@ -18,9 +18,9 @@ express_cassandra_1.default.setDirectory(path_1.default.join(__dirname, "/models
         },
         migration: NODE_ENV === "production" ? "safe" : "drop",
     },
-    function(error) {
-        if (error)
-            throw error;
+    function(err) {
+        if (err)
+            throw err;
     },
 });
 exports.default = express_cassandra_1.default;
